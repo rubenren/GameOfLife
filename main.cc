@@ -3,17 +3,18 @@
 #include <string>
 #include <unistd.h>
 
-#define size 30
+#define sizex 40
+#define sizey 80
 
 using namespace std;
 
-void printBoard(int a[][size]){
+void printBoard(int a[][sizey]){
 	string garbage = "";
 	//cin >> garbage;
 	usleep(100000);
 	system("clear");
-	for(int i=0; i<size; i++){
-		for(int j=0; j<size; j++){
+	for(int i=0; i<sizex; i++){
+		for(int j=0; j<sizey; j++){
 			if(a[i][j]==1)cout << "*";
 			else cout << " ";
 		}
@@ -21,45 +22,59 @@ void printBoard(int a[][size]){
 	}
 }
 
-int wrapper(int a, int b){
-	if(a+b < 0)return size-1;
-	return (a+b)%size;
+int wrapperx(int a, int b){
+	if(a+b < 0)return sizex-1;
+	return (a+b)%sizex;
+}
+
+int wrappery(int a, int b){
+	if(a+b < 0)return sizey-1;
+	return (a+b)%sizey;
+}
+
+int checkerx(int a){
+	return a%sizex;
+}
+
+int checkery(int a){
+	return a%sizey;
 }
 
 int main(){
 
-	int board[size][size] = {};
-	int temp[size][size] = {};
+	int board[sizex][sizey] = {};
+	int temp[sizex][sizey] = {};
 	int inputx= 0;
 	int inputy= 0;
 	while(cin){
 		cin >> inputx;
 		if(inputx ==-1)break;
 		cin >> inputy;
-		if(board[inputx][inputy] == 1)board[inputx][inputy] = 0;
-		else board[inputx][inputy] = 1;
+		if(inputy ==-1)break;
+		if(board[checkerx(inputx)][checkery(inputy)] == 1)board[checkerx(inputx)][checkery(inputy)] = 0;
+		else board[checkerx(inputx)][checkery(inputy)] = 1;
 	}
 
 	string garbo = "";
 	printBoard(board);
-	cin >> garbo;
+	//cin >> garbo;
 
 	int liveCount = 0;
 	while(true){
 		
-		for(int i=0; i<size; i++){
-			for(int j=0; j<size; j++){
+		for(int i=0; i<sizex; i++){
+			for(int j=0; j<sizey; j++){
 				temp[i][j] = board[i][j];
 			}
 		}
 
-		for(int i=0; i<size; i++){
-			for(int j=0; j<size; j++){
+		for(int i=0; i<sizex; i++){
+			for(int j=0; j<sizey; j++){
 				liveCount=0;
 				for(int x=-1; x<2; x++){
 					for(int y=-1; y<2; y++){
 						if(x == 0 && y == 0);
-						else if(board[wrapper(i,x)][wrapper(j,y)] == 1)liveCount+=1;
+						else if(board[wrapperx(i,x)][wrappery(j,y)] == 1)liveCount+=1;
 					}
 				}
 				if(board[i][j] == 1){
@@ -72,8 +87,8 @@ int main(){
 			}
 		}
 
-		for(int i=0; i<size; i++){
-			for(int j=0; j<size; j++){
+		for(int i=0; i<sizex; i++){
+			for(int j=0; j<sizey; j++){
 				board[i][j] = temp[i][j];
 			}
 		}
