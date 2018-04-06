@@ -61,7 +61,7 @@ int main(){
 
 	int liveCount = 0;
 	while(true){
-		
+
 		for(int i=0; i<sizex; i++){
 			for(int j=0; j<sizey; j++){
 				temp[i][j] = board[i][j];
@@ -95,6 +95,5 @@ int main(){
 
 		printBoard(board);
 	}
-
 
 }
