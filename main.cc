@@ -8,6 +8,11 @@
 
 using namespace std;
 
+/* 
+ * used to print out the current board
+ * 
+ * @param a the two-dimensional representation of the board
+ **/
 void printBoard(int a[][sizey]){
 	usleep(100000);
 	system("clear");
@@ -20,20 +25,50 @@ void printBoard(int a[][sizey]){
 	}
 }
 
-int wrapperx(int a, int b){
-	if(a+b < 0)return sizex-1;
-	return (a+b)%sizex;
+/* 
+ * handles over and underflow
+ * 
+ * @param start the starting position
+ * @param offset how far the object will go
+ * @return the adjusted coordinate
+ * note: only works for incrementing and decrementing in ones
+ **/
+int wrapperx(int start, int offset){
+	if(start+offset < 0)return sizex-1;
+	return (start+offset) % sizex;
 }
 
-int wrappery(int a, int b){
-	if(a+b < 0)return sizey-1;
-	return (a+b)%sizey;
+
+/* 
+ * handles over and underflow
+ * 
+ * @param start the starting position
+ * @param offset how far the object will go
+ * @return the adjusted coordinate
+ * note: only works for incrementing and decrementing in ones
+ **/
+int wrappery(int start, int offset){
+	if(start+offset < 0)return sizey-1;
+	return (start+offset)%sizey;
 }
 
+/*
+ * sanity check for x dimension
+ * 
+ * @param a number to check
+ * @return returns equivalent coordinate
+ **/
 int checkerx(int a){
 	return a%sizex;
 }
 
+
+/*
+ * sanity check for x dimension
+ * 
+ * @param a number to check
+ * @return returns equivalent coordinate
+ **/
 int checkery(int a){
 	return a%sizey;
 }
