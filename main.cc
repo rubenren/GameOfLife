@@ -9,8 +9,6 @@
 using namespace std;
 
 void printBoard(int a[][sizey]){
-	string garbage = "";
-	//cin >> garbage;
 	usleep(100000);
 	system("clear");
 	for(int i=0; i<sizex; i++){
@@ -55,9 +53,7 @@ int main(){
 		else board[checkerx(inputx)][checkery(inputy)] = 1;
 	}
 
-	string garbo = "";
 	printBoard(board);
-	//cin >> garbo;
 
 	int liveCount = 0;
 	while(true){
